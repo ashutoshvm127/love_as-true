@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be Mine?</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    
+    .container {
+      text-align: center;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+    
+    h1 {
+      color: #e91e63;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      color: #555;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+    }
+    
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      padding: 12px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .btn-yes {
+      background-color: #4CAF50;
+      color: white;
+      box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+    }
+    
+    .btn-yes:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+    }
+    
+    .btn-no {
+      background-color: #f44336;
+      color: white;
+      box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+      position: relative;
+    }
+    
+    .celebration {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    .heart {
+      font-size: 100px;
+      color: #e91e63;
+      animation: pulse 1s infinite alternate;
+    }
+    
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+    
+    .message {
+      font-size: 2rem;
+      color: #e91e63;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-image {
+      width: 80%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 1rem auto;
+      display: block;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      border: 3px solid #f8bbd0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will You Be Mine?</h1>
+    <img src="love.jpg" alt="Couple photo" class="main-image">
+    <div class="buttons">
+      <button class="btn btn-yes" onclick="celebration()">Yes</button>
+      <button class="btn btn-no" onmouseover="moveButton(this)">No</button>
+    </div>
+  </div>
+  
+  <div class="celebration" id="celebration">
+    <div class="heart">❤️</div>
+    <div class="message">Yaay! I love you too!</div>
+    <img src="/api/placeholder/500/300" alt="Happy couple" style="margin-top: 2rem; max-width: 300px;">
+  </div>
+  
+  <script>
+    function moveButton(button) {
+      // Calculate random position within viewport
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      
+      // Keep the button within the visible area
+      const safeX = Math.min(Math.max(x, 50), window.innerWidth - 150);
+      const safeY = Math.min(Math.max(y, 50), window.innerHeight - 80);
+      
+      // Set new position
+      button.style.position = 'fixed';
+      button.style.left = safeX + 'px';
+      button.style.top = safeY + 'px';
+    }
+    
+    function celebration() {
+      document.getElementById('celebration').style.display = 'flex';
+      // Create falling hearts
+      createHearts();
+    }
+    
+    function createHearts() {
+      const container = document.body;
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.innerHTML = '❤️';
+          heart.style.position = 'fixed';
+          heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.top = '-20px';
+          heart.style.opacity = Math.random() * 0.5 + 0.5;
+          heart.style.zIndex = '200';
+          heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+          heart.style.color = `hsl(${Math.random() * 60 + 330}, 100%, 65%)`;
+          container.appendChild(heart);
+          
+          setTimeout(() => {
+            container.removeChild(heart);
+          }, 5000);
+        }, i * 100);
+      }
+      
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes fall {
+          to {
+            transform: translateY(100vh) rotate(${Math.random() * 360}deg);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  </script>
+</body>
+</html>
