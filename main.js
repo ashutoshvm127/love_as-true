@@ -65,7 +65,7 @@ const ProposalWebsite = () => {
       <div className="bg-white p-8 rounded-2xl shadow-lg max-w-md w-11/12 text-center relative">
         <h1 className="text-2xl font-bold text-pink-500 mb-4">Will You Be Mine?</h1>
         <img 
-          src="/api/placeholder/400/300" 
+          src="love.jpg" 
           alt="Couple photo placeholder" 
           className="w-4/5 mx-auto rounded-lg shadow-md border-4 border-pink-200 mb-4"
         />
@@ -99,7 +99,7 @@ const ProposalWebsite = () => {
           <div className="text-8xl animate-pulse text-pink-500">❤️</div>
           <div className="text-3xl font-bold text-pink-500 mt-4">Yaay! I love you too!</div>
           <img 
-            src="/api/placeholder/500/300" 
+            src="love.jpg" 
             alt="Happy couple" 
             className="mt-8 max-w-xs rounded-lg shadow-md"
           />
